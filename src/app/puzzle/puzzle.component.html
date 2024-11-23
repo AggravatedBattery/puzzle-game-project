@@ -1,0 +1,43 @@
+<div class="puzzle-container">
+  <h1>Solve this Puzzle by sliding the Tiles!</h1>
+
+  <div class="game-info">
+    <p>Moves: {{ moves }}</p>
+    <p>Time Remaining: {{ getTimerDisplay() }}</p>
+    <button (click)="initializePuzzle()" class="reset-button">
+      New Game
+    </button>
+  </div>
+
+  <div class="puzzle-grid" [style.width.px]="baseSize" [style.height.px]="baseSize">
+    <div *ngIf="showComplete" class="complete-image" [style.backgroundImage]="'url(' + imageUrl + ')'"></div>
+
+    <div *ngFor="let tile of tiles; let i = index" class="tile" [class.empty]="tile === 0 && !showComplete" [ngStyle]="getTileStyle(i)" [@tileSlide]="tiles[i]" (click)="moveTile(i)">
+      <div class="tile-number" *ngIf="tile !== 0 && !showComplete">
+        {{ tile }}
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="gameComplete && timer > 0" class="win-message">
+    <h2>Congratulations!</h2>
+    <p>You solved the puzzle in {{ moves }} moves!</p>
+    <h2>Your score: {{ calculateScore() }}</h2>
+    <button (click)="initializePuzzle()" class="reset-button" style="margin-top: 15px;">
+      Play Again
+    </button>
+  </div>
+
+  <div *ngIf="gameComplete && timer === 0" class="lose-message">
+    <h2>Time's Up! You Lost!</h2>
+    <p>Better luck next time!</p>
+    <h2>Your score: {{ calculateScore() }}</h2>
+    <button (click)="initializePuzzle()" class="reset-button" style="margin-top: 15px;">
+      Try Again
+    </button>
+  </div>
+
+  <button (click)="goToHome()" class="reset-button" style="margin-top: 20px;">
+    Quit to Home
+  </button>
+</div>

@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="content-wrapper">
+      <div class="welcome-card">
+        <h1 class="title">Log In</h1>
+        <form class="login-form">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required>
+  
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+  
+          <div class="button-container">
+            <button (click)="goToPuzzle()" class="start-button">Log In</button>
+            <button (click)="goBackHome()" class="back-button">Back</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
